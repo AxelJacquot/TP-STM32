@@ -1,7 +1,7 @@
 #include "configuration.h"
 
 /*--------------------------------------------------------------------------------------------------------------*/
-/*											Timer Configuration																									*/
+/*											Timer Configuration													*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
 void Timer_Config(TIM_HandleTypeDef * Timer, TIM_TypeDef * timer_choice, unsigned int prescaler, unsigned int period){
@@ -76,7 +76,7 @@ void ENABLE_CLK_TIMER_CHOICE(TIM_TypeDef * timer){
 }
 
 /*--------------------------------------------------------------------------------------------------------------*/
-/*									GPIO Configuration																										*/
+/*									GPIO Configuration															*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
 void GPIO_Configuration(GPIO_TypeDef * GPIO, unsigned int mode, unsigned int Pin, unsigned int alternate){
