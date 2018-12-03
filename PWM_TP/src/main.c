@@ -1,6 +1,6 @@
 #include "configuration.h"
 
-void wait (unsigned int time);
+void wait (uint16_t time);
 TIM_HandleTypeDef TIM_Handle;
 
 int main(void){
@@ -18,6 +18,6 @@ int main(void){
 }
 
 
-void wait (unsigned int time){
+void wait (uint16_t time){
 	for(int i = 0; i<time*4000;i++); //16MHz/4ms for 4M loops/sec => 1ms=4k loops
 }
