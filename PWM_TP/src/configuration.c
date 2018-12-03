@@ -4,9 +4,11 @@
 /*											Timer Configuration													*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
-void Timer_Config(TIM_HandleTypeDef * Timer, TIM_TypeDef * timer_choice, unsigned int prescaler, unsigned int period){
-	//Fonction permettant la configuration du choix du timer ainsi que sa fréqunce
+
+void Timer_Config(TIM_HandleTypeDef * Timer, TIM_TypeDef * timer_choice, uint16_t prescaler, uint16_t period){
+//Fonction permettant la configuration du choix du timer ainsi que sa fréqunce
 	ENABLE_CLK_TIMER_CHOICE(timer_choice);		//Acivation du timer mis en paramètre
+
 										
 	Timer->Instance = timer_choice;				//Sélection du timer pour la configuration
 	Timer->Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -17,17 +19,19 @@ void Timer_Config(TIM_HandleTypeDef * Timer, TIM_TypeDef * timer_choice, unsigne
 	HAL_TIM_Base_Init(Timer);					//Initialisation du Timer configuré
 }
 									
-void Timer_Mode_OCPWM_Config(TIM_HandleTypeDef * Timer, unsigned int mode, unsigned int polarity){
-	//Fonction permettant de configurer le mode output compare ou PWM du timer
-	HAL_TIM_OC_Init(Timer);				//Signifit que nous allons travailler sur le timer mis en paramètre
+
+void Timer_Mode_OCPWM_Config(TIM_HandleTypeDef * Timer, uint16_t mode, uint16_t polarity){
+//Fonction permettant de configurer le mode output compare ou PWM du timer
+	HAL_TIM_OC_Init(Timer);       //Signifit que nous allons travailler sur le timer mis en paramètre
+
 	TIM_OC_InitTypeDef TIM_PWM_OC;
 	
 	TIM_PWM_OC.OCMode = mode;			//Configure le mode du timer
 	TIM_PWM_OC.OCPolarity = polarity;	//Configure la polarité
 }
 
-void Timer_PWM_OCPWM_Pulse_Channel(TIM_HandleTypeDef * Timer, unsigned int channel, unsigned int pulse){
-	//Fonction permettant de gérer le temps soit de l'état haut soit de l'etat bas selon comment est configuré le timer mis en paramètre
+void Timer_PWM_OCPWM_Pulse_Channel(TIM_HandleTypeDef * Timer, uint16_t channel, uint16_t pulse){
+  //Fonction permettant de gérer le temps soit de l'état haut soit de l'etat bas selon comment est configuré le timer mis en paramètre
 	HAL_TIM_OC_Init(Timer);
 	TIM_OC_InitTypeDef TIM_PWM_OC;
 	
@@ -35,7 +39,7 @@ void Timer_PWM_OCPWM_Pulse_Channel(TIM_HandleTypeDef * Timer, unsigned int chann
 	HAL_TIM_OC_ConfigChannel(Timer,&TIM_PWM_OC, channel);
 }
 
-void Timer_Mode_IC_Config(TIM_HandleTypeDef * Timer, unsigned int polarity, unsigned int filter, unsigned int selection, unsigned int prescaler){
+void Timer_Mode_IC_Config(TIM_HandleTypeDef * Timer, uint16_t polarity, uint16_t filter, uint16_t selection, uint16_t prescaler){
 	HAL_TIM_IC_Init(Timer);
 	TIM_IC_InitTypeDef TIM_IC;
 	
@@ -80,9 +84,10 @@ void ENABLE_CLK_TIMER_CHOICE(TIM_TypeDef * timer){
 /*									GPIO Configuration															*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
-void GPIO_Configuration(GPIO_TypeDef * GPIO, unsigned int mode, unsigned int Pin, unsigned int alternate){
+
+void GPIO_Configuration(GPIO_TypeDef * GPIO, uint16_t mode, uint16_t Pin, uint16_t alternate){
 	//Fonction permettant la configuration des GPIOs présent sur la carte STM32
-	ENABLE_CLK_GPIO(GPIO);										//Activation du port mis en paramètre(GPIO)
+	ENABLE_CLK_GPIO(GPIO);                //Activation du port mis en paramètre(GPIO)
 	
 	GPIO_InitTypeDef GPIO_Config;
 	

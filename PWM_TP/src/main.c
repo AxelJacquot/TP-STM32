@@ -1,8 +1,7 @@
 #include "configuration.h"
 
-void wait (unsigned int time);
-
-TIM_HandleTypeDef TIM_Handle;		//Variable contenant la configuration du timer 4(mis dans chaque fonction à cause de cela).
+void wait (uint16_t time);
+TIM_HandleTypeDef TIM_Handle; //Variable contenant la configuration du timer 4(mis dans chaque fonction à cause de cela)
 
 int main(void){
 	GPIO_Configuration(GPIOD, GPIO_MODE_AF_PP, Green | Blue, GPIO_AF2_TIM4);	//Configuration des pins des Leds verte et bleu se trouvant sur le port D en mode alternatif PP, les pins prendront leurs états des sorties du timer 4
@@ -18,6 +17,6 @@ int main(void){
 }
 
 
-void wait (unsigned int time){
+void wait (uint16_t time){
 	for(int i = 0; i<time*4000;i++); //16MHz/4ms for 4M loops/sec => 1ms=4k loops
 }

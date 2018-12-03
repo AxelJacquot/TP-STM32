@@ -14,13 +14,13 @@
 #define Led_all		Green | Orange | Red | Blue
 
 
-void Timer_Mode_OCPWM_Config(TIM_HandleTypeDef * Timer, unsigned int mode, unsigned int polarity);
-void Timer_PWM_OCPWM_Pulse_Channel(TIM_HandleTypeDef * Timer, unsigned int channel, unsigned int pulse);
+void Timer_Mode_OCPWM_Config(TIM_HandleTypeDef * Timer, uint16_t mode, uint16_t polarity);
+void Timer_PWM_OCPWM_Pulse_Channel(TIM_HandleTypeDef * Timer, uint16_t channel, uint16_t pulse);
 void ENABLE_CLK_TIMER_CHOICE(TIM_TypeDef * timer);
-void Timer_Config(TIM_HandleTypeDef * Timer, TIM_TypeDef * timer_choice, unsigned int prescaler, unsigned int period);
-void Timer_Mode_IC_Config(TIM_HandleTypeDef * Timer, unsigned int polarity, unsigned int filter, unsigned int selection, unsigned int prescaler);
+void Timer_Config(TIM_HandleTypeDef * Timer, TIM_TypeDef * timer_choice, uint16_t prescaler, uint16_t period);
+void Timer_Mode_IC_Config(TIM_HandleTypeDef * Timer, uint16_t polarity, uint16_t filter, uint16_t selection, uint16_t prescaler);
 void ENABLE_CLK_GPIO(GPIO_TypeDef * GPIO);
-void GPIO_Configuration(GPIO_TypeDef * GPIO, unsigned int mode, unsigned int Pin, unsigned int alternate);
+void GPIO_Configuration(GPIO_TypeDef * GPIO, uint16_t mode, uint16_t Pin, uint16_t alternate);
 
 
 
