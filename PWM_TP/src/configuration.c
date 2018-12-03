@@ -5,28 +5,29 @@
 /*--------------------------------------------------------------------------------------------------------------*/
 
 void Timer_Config(TIM_HandleTypeDef * Timer, TIM_TypeDef * timer_choice, unsigned int prescaler, unsigned int period){
+	//Fonction permettant la configuration du choix du timer ainsi que sa fréqunce
+	ENABLE_CLK_TIMER_CHOICE(timer_choice);		//Acivation du timer mis en paramètre
 										
-	ENABLE_CLK_TIMER_CHOICE(timer_choice);
-										
-	Timer->Instance = timer_choice;
+	Timer->Instance = timer_choice;				//Sélection du timer pour la configuration
 	Timer->Init.CounterMode = TIM_COUNTERMODE_UP;
 	Timer->Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	Timer->Init.Prescaler = (prescaler) - 1;
 	Timer->Init.Period = (period);
 	
-	HAL_TIM_Base_Init(Timer);
+	HAL_TIM_Base_Init(Timer);					//Initialisation du Timer configuré
 }
 									
 void Timer_Mode_OCPWM_Config(TIM_HandleTypeDef * Timer, unsigned int mode, unsigned int polarity){
-	HAL_TIM_OC_Init(Timer);
+	//Fonction permettant de configurer le mode output compare ou PWM du timer
+	HAL_TIM_OC_Init(Timer);				//Signifit que nous allons travailler sur le timer mis en paramètre
 	TIM_OC_InitTypeDef TIM_PWM_OC;
 	
-	TIM_PWM_OC.OCMode = mode;
-	TIM_PWM_OC.OCPolarity = polarity;		
-	TIM_PWM_OC.OCFastMode = TIM_OCFAST_DISABLE;
+	TIM_PWM_OC.OCMode = mode;			//Configure le mode du timer
+	TIM_PWM_OC.OCPolarity = polarity;	//Configure la polarité
 }
 
 void Timer_PWM_OCPWM_Pulse_Channel(TIM_HandleTypeDef * Timer, unsigned int channel, unsigned int pulse){
+	//Fonction permettant de gérer le temps soit de l'état haut soit de l'etat bas selon comment est configuré le timer mis en paramètre
 	HAL_TIM_OC_Init(Timer);
 	TIM_OC_InitTypeDef TIM_PWM_OC;
 	
@@ -80,20 +81,21 @@ void ENABLE_CLK_TIMER_CHOICE(TIM_TypeDef * timer){
 /*--------------------------------------------------------------------------------------------------------------*/
 
 void GPIO_Configuration(GPIO_TypeDef * GPIO, unsigned int mode, unsigned int Pin, unsigned int alternate){
-	
-	ENABLE_CLK_GPIO(GPIO);
+	//Fonction permettant la configuration des GPIOs présent sur la carte STM32
+	ENABLE_CLK_GPIO(GPIO);										//Activation du port mis en paramètre(GPIO)
 	
 	GPIO_InitTypeDef GPIO_Config;
 	
-	GPIO_Config.Mode = mode;
-	if(mode == GPIO_MODE_AF_PP || mode == GPIO_MODE_AF_OD)
+	GPIO_Config.Mode = mode;									//Configuration du mode de la GPIO avec le mode mis en paramètre
+	if(mode == GPIO_MODE_AF_PP || mode == GPIO_MODE_AF_OD)		//Si le mode choisie est alternatif alors nous configurons l'alternatif via la variable mis en paramètre
 		GPIO_Config.Alternate = alternate;
-	GPIO_Config.Pin = Pin;
+	//GPIO_Config.Speed = GPIO_SPEED_
+	GPIO_Config.Pin = Pin;										//Activation des pins qui sont mis en paramètre
 	
-	HAL_GPIO_Init(GPIO,&GPIO_Config);
+	HAL_GPIO_Init(GPIO,&GPIO_Config);							//Initialisation de la configuration effectué
 }	
 
-void ENABLE_CLK_GPIO(GPIO_TypeDef * GPIO){
+void ENABLE_CLK_GPIO(GPIO_TypeDef * GPIO){						//Permet d'activer le port voulue
 	if(GPIO == GPIOA)
 		__HAL_RCC_GPIOA_CLK_ENABLE();
 	else if(GPIO == GPIOB)
